@@ -1,27 +1,45 @@
 # Smart-Study-Time-Optimizer-C++
 
-A simple C++ program that creates daily study schedules based on subject difficulty and deadlines.
+A simple C++ console project that helps students decide what subject to study first.
 
-## Project idea
-The student enters available study hours, subjects, difficulty levels (1-5), and days remaining until deadlines. The final program will give more time to difficult subjects and subjects with closer deadlines.
+## Current progress (approximately 30%)
+- Enter available study hours.
+- Enter up to 10 subjects, their difficulty (1-5), and days until deadline.
+- Calculate a priority score for each subject.
+- Show High, Medium, or Low priority and suggest which subject to study first.
 
-## Current progress
-**Phase 1 complete:** The console program collects and displays study details for up to 10 subjects. It does not calculate a schedule yet.
+**Not built yet:** dividing study hours between subjects and generating a daily schedule.
 
-## How to run
-Open `main.cpp` in Visual Studio, or compile it using g++:
+## How the priority score works
+Start with the subject's difficulty (1 to 5).
 
-```bash
-g++ -std=c++11 main.cpp -o study-optimizer
-```
+- Deadline in 0-2 days: add 3.
+- Deadline in 3-7 days: add 2.
+- Deadline in 8 or more days: add 1.
 
-Then run `./study-optimizer` (or `study-optimizer.exe` on Windows).
+Scores of 7-8 are **High**, 5-6 **Medium**, and 2-4 **Low**.
+
+If several subjects share the highest score, the program suggests the first one entered.
+
+Example:
+
+| Subject | Difficulty | Days left | Score |
+| --- | ---: | ---: | ---: |
+| Linear Algebra | 5 | 2 | 8 (High) |
+| C++ Programming | 4 | 5 | 6 (Medium) |
+| Applied Physics | 3 | 9 | 4 (Low) |
+
+## Run in VS Code (Windows)
+1. Open the cloned repository in VS Code.
+2. Install Microsoft's C/C++ extension if needed.
+3. Press **Ctrl+Shift+B** to compile using the included MSVC build task (requires Visual Studio C++ Build Tools).
+4. Run `.\study.exe` in the VS Code PowerShell terminal. You can also press **F5** to debug.
 
 ## Development plan
 1. Subject input and display (done)
-2. Priority calculation using difficulty and deadlines
-3. Study-time allocation and daily schedule
-4. Testing and input validation
+2. Priority calculation using difficulty and deadlines (done)
+3. Study-time allocation and daily schedule (next)
+4. Additional testing and improvements
 
 ## C++ concepts
-Variables, input/output, conditions, loops, arrays, strings, and functions.
+Variables, input/output, `if-else` conditions, loops, arrays, and strings. Functions can be introduced in a later phase.
