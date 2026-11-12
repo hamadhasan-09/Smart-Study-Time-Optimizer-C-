@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Smart Study Time Optimizer",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\study.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "preLaunchTask": "Build Smart Study Time Optimizer"
+    }
+  ]
+}
