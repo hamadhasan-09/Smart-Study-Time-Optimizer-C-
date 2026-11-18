@@ -5,78 +5,78 @@ using namespace std;
 int main() {
     string subjects[10];
     int difficulty[10], daysLeft[10], priority[10];
-    int count = 0;
-    float hours = 0;
+    float studyTime[10];
+    int count;
+    int totalPriority = 0;
+    float hours;
 
     cout << "=== Smart Study Time Optimizer ===\n";
 
-    cout << "Available study hours: ";
+    cout << "Enter available study hours: ";
     cin >> hours;
-    if (!cin || hours <= 0) {
+
+    if (hours <= 0) {
         cout << "Please enter valid study hours.\n";
-        return 1;
+        return 0;
     }
 
-    cout << "Number of subjects (1-10): ";
+    cout << "Enter number of subjects (1-10): ";
     cin >> count;
-    if (!cin || count < 1 || count > 10) {
+
+    if (count < 1 || count > 10) {
         cout << "Please enter 1 to 10 subjects.\n";
-        return 1;
+        return 0;
     }
 
     for (int i = 0; i < count; i++) {
         cout << "\nSubject " << i + 1 << "\n";
-        cout << "Name: ";
-        getline(cin >> ws, subjects[i]); // Allows names with spaces
 
-        cout << "Difficulty (1-5): ";
+        cout << "Enter subject name: ";
+        getline(cin >> ws, subjects[i]);
+
+        cout << "Enter difficulty (1-5): ";
         cin >> difficulty[i];
-        if (!cin || difficulty[i] < 1 || difficulty[i] > 5) {
-            cout << "Difficulty must be from 1 to 5.\n";
-            return 1;
-        }
 
-        cout << "Days until deadline (0 = today): ";
+        cout << "Enter days until deadline: ";
         cin >> daysLeft[i];
-        if (!cin || daysLeft[i] < 0) {
-            cout << "Days cannot be negative.\n";
-            return 1;
+
+        if (difficulty[i] < 1 || difficulty[i] > 5 || daysLeft[i] < 0) {
+            cout << "Invalid information. Please try again.\n";
+            return 0;
         }
 
-        // Harder subjects and closer deadlines get higher scores.
         priority[i] = difficulty[i];
+
         if (daysLeft[i] <= 2) {
-            priority[i] += 3;
-        } else if (daysLeft[i] <= 7) {
-            priority[i] += 2;
-        } else {
-            priority[i] += 1;
+            priority[i] = priority[i] + 3;
         }
+        else if (daysLeft[i] <= 7) {
+            priority[i] = priority[i] + 2;
+        }
+        else {
+            priority[i] = priority[i] + 1;
+        }
+
+        totalPriority = totalPriority + priority[i];
     }
 
-    cout << "\n=== Study Priorities ===\n";
-    cout << "Available time: " << hours << " hours\n";
+    cout << "\n=== Your Study Plan ===\n";
 
-    int best = 0;
+    int highest = 0;
+
     for (int i = 0; i < count; i++) {
-        string level;
-        if (priority[i] >= 7) {
-            level = "High";
-        } else if (priority[i] >= 5) {
-            level = "Medium";
-        } else {
-            level = "Low";
-        }
+        studyTime[i] = hours * priority[i] / totalPriority;
 
-        cout << subjects[i] << " - Score: " << priority[i]
-             << " (" << level << ")\n";
+        cout << "\nSubject: " << subjects[i];
+        cout << "\nPriority score: " << priority[i];
+        cout << "\nStudy time: " << studyTime[i] << " hours\n";
 
-        if (priority[i] > priority[best]) {
-            best = i;
+        if (priority[i] > priority[highest]) {
+            highest = i;
         }
     }
 
-    cout << "\nStudy first: " << subjects[best] << "\n";
-    cout << "Time allocation will be added in the next phase.\n";
+    cout << "\nYou should study first: " << subjects[highest] << "\n";
+
     return 0;
 }
