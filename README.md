@@ -2,7 +2,7 @@
 
 A beginner-level C++ console project that helps students decide what to study and how much time to give each subject.
 
-## Current progress (approximately 40%)
+## Current progress 
 - Enter available study hours.
 - Enter up to 10 subjects, their difficulty (1-5), and days until deadline.
 - Calculate a priority score for each subject.
